@@ -1,0 +1,137 @@
+### Enviar dado para a Sala 1
+POST http://localhost:3000/api/dados-sensor
+Content-Type: application/json
+
+{
+  "salaId": 1,
+  "decibeis": 65.50
+}
+
+### Enviar dado para a Sala 2
+POST http://localhost:3000/api/dados-sensor
+Content-Type: application/json
+
+{
+  "salaId": 1,
+  "decibeis": 82.10
+}
+
+###
+
+###
+
+POST http://localhost:3000/api/dados-sensor
+Content-Type: application/json
+
+{
+  "salaId": 3,
+  "decibeis": 82.10
+}
+
+###
+
+POST http://localhost:3000/api/dados-sensor
+Content-Type: application/json
+
+{
+  "salaId": 4,
+  "decibeis": 82.10
+}
+
+###
+
+POST http://localhost:3000/api/dados-sensor
+Content-Type: application/json
+
+{
+  "salaId": 5,
+  "decibeis": 82.10
+}
+
+###
+
+POST http://localhost:3000/api/dados-sensor
+Content-Type: application/json
+
+{
+  "salaId": 6,
+  "decibeis": 82.10
+}
+
+###
+
+POST http://localhost:3000/api/dados-sensor
+Content-Type: application/json
+
+{
+  "salaId": 7,
+  "decibeis": 82.10
+}
+
+###
+
+POST http://localhost:3000/api/dados-sensor
+Content-Type: application/json
+
+{
+  "salaId": 8,
+  "decibeis": 82.10
+}
+
+###
+
+POST http://localhost:3000/api/dados-sensor
+Content-Type: application/json
+
+{
+  "salaId": 9,
+  "decibeis": 82.10
+}
+
+###
+
+POST http://localhost:3000/api/dados-sensor
+Content-Type: application/json
+
+{
+  "salaId": 10,
+  "decibeis": 82.10
+}
+
+###
+
+POST http://localhost:3000/api/dados-sensor
+Content-Type: application/json
+
+{
+  "salaId": 11,
+  "decibeis": 82.10
+}
+
+###
+
+POST http://localhost:3000/api/dados-sensor
+Content-Type: application/json
+
+{
+  "salaId": 12,
+  "decibeis": 82.10
+}
+
+### REGISTRAR UM NOVO USUÁRIO
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "senha123"
+}
+
+### FAZER LOGIN
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "senha123"
+}

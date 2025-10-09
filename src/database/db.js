@@ -4,16 +4,15 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'projeto_semaforo_db'
+  database: 'projeto_semaforo_db' 
 });
 
 connection.connect((err) => {
   if (err) {
-    console.error('ERRO AO CONECTAR NO BANCO DE DADOS');
-    console.error(err.stack);
+    console.error('--- ERRO AO CONECTAR NO BANCO ---', err.stack);
     return;
   }
-  console.log('conectou certinho ao banco');
+  console.log('>>> Conexão com o banco MySQL estabelecida!');
 });
 
-module.exports = connection; 
+module.exports = connection.promise(); 
