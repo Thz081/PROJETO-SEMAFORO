@@ -1,8 +1,8 @@
 # Semáforo Sensorial de Sala de Aula - Back-end
 
-[cite_start]Este é o repositório oficial do back-end para o projeto Semáforo Sensorial, desenvolvido pela equipe da ETE Advogado José David Gil Rodrigues. [cite: 4] [cite_start]O servidor é construído com Node.js, Express e MySQL. [cite: 32]
+Este é o repositório oficial do back-end para o projeto Semáforo Sensorial, desenvolvido pela equipe da ETE Advogado José David Gil Rodrigues. O servidor é construído com Node.js, Express e MySQL. 
 
-[cite_start]O objetivo é criar uma solução de IoT para monitorar os níveis de ruído em salas de aula, promovendo a inclusão de estudantes com hipersensibilidade sensorial, como os que estão no espectro autista (TEA). [cite: 14, 15, 17]
+O objetivo é criar uma solução de IoT para monitorar os níveis de ruído em salas de aula, promovendo a inclusão de estudantes com hipersensibilidade sensorial, como os que estão no espectro autista (TEA). 
 
 ## Como Rodar o Projeto Localmente
 
