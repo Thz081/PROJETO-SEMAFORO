@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const sensorRoutes = require('./routes/sensorRoutes');
 const authRoutes = require('./routes/authRoutes'); 
+const salaRoutes = require('./routes/salaRoutes');
 
 const app = express();
 
@@ -17,5 +18,6 @@ app.use(session({
 
 app.use('/api', sensorRoutes);
 app.use('/api/auth', authRoutes); 
+app.use('/api/salas', salaRoutes);
 
 module.exports = app;

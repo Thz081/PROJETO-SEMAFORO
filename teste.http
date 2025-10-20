@@ -122,7 +122,7 @@ Content-Type: application/json
 POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
-{
+{ "email": "admin123@gmail.com",
   "username": "admin",
   "password": "senha123"
 }
@@ -131,7 +131,86 @@ Content-Type: application/json
 POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
-{
+{ "identifier":"admin",
   "username": "admin",
   "password": "senha123"
+}
+
+
+
+### =====================================
+### PASSO 0: AUTENTICAÇÃO (OBRIGATÓRIO!)
+### =====================================
+# Antes de tudo, faça o login para obter o "crachá" de acesso (cookie de sessão)
+# Clique em "Send Request" nesta requisição primeiro!
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "identifier": "admin",
+  "password": "senha123"
+}
+
+
+### =====================================
+### TESTES DO CRUD DE SALAS
+### =====================================
+
+### TESTE 1: Listar todas as salas (GET)
+# Deve retornar um array com as 12 salas que a gente criou no banco.
+GET http://localhost:3000/api/salas
+
+
+### TESTE 2: Criar uma nova sala (POST)
+# Vamos criar a sala 13 - "Vikings"
+POST http://localhost:3000/api/salas
+Content-Type: application/json
+
+{
+  "nome_sala": "3° C DS | VIKINGS",
+  "logo_url": "/logos/sala13.png"
+}
+
+
+### TESTE 3: Obter uma sala específica (GET com ID)
+# Vamos buscar a sala "Spartta", que tem o ID 1
+GET http://localhost:3000/api/salas/1
+
+
+### TESTE 4: Atualizar uma sala (PUT)
+# Vamos mudar o nome da sala "Vikings" que acabamos de criar (assumindo que o ID dela será 13)
+PUT http://localhost:3000/api/salas/13
+Content-Type: application/json
+
+{
+  "nome_sala": "3° C DS | VIKINGS (ATUALIZADO)",
+  "logo_url": "/logos/vikings_novo.png"
+}
+
+
+### TESTE 5: Deletar uma sala (DELETE)
+# Vamos deletar a sala "Vikings" que acabamos de atualizar (ID 13)
+DELETE http://localhost:3000/api/salas/13
+
+### TESTE: Solicitar Recuperação de Senha
+# Envia um POST para a rota /api/auth/forgot-password
+# O corpo da requisição deve ser um JSON contendo o e-mail do usuário
+# que você já registrou no banco de dados.
+POST http://localhost:3000/api/auth/forgot-password
+Content-Type: application/json
+
+{
+  "email": "tacyohenrique07@gmail.com"
+}
+
+
+### TESTE: Redefinir a Senha
+# Envia um POST para a rota /api/auth/reset-password
+# O corpo deve conter o token recebido por e-mail e a nova senha desejada.
+POST http://localhost:3000/api/auth/reset-password
+Content-Type: application/json
+
+{
+  "token": "6ac3a006d490bbc759b873ec33b8cea3acff3f3fe9d40bf481c485bd1979bb06",
+  "newPassword": "novaSenhaSuperSegura456"
 }

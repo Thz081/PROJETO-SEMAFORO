@@ -197,3 +197,115 @@ Todas as rotas da API são prefixadas com `/api`.
       "mensagem": "Login realizado com sucesso! Bem-vindo, admin!"
     }
     ```
+
+    ### Rotas de Gestão de Salas (`/api/salas`)
+
+### Rotas de Gestão de Salas (`/api/salas`)
+
+**Observação:** Todas as rotas abaixo são protegidas e requerem autenticação (o usuário precisa estar logado).
+
+#### `GET /api/salas`
+* **Descrição:** Retorna uma lista com todas as salas cadastradas no sistema, ordenadas por ID. Útil para preencher listas ou exibir todas as opções de salas no painel administrativo.
+* **Protegida?** Sim.
+* **Exemplo de Resposta (JSON) - Sucesso (200 OK):**
+    ```json
+    [
+      { "id": 1, "nome_sala": "1° A ADM | SPARTTA", "logo_url": "/logos/sala 1.png" },
+      { "id": 2, "nome_sala": "1° B ADM | ELECTRA", "logo_url": "/logos/sala 2.png" }
+    ]
+    ```
+
+#### `POST /api/salas`
+* **Descrição:** Cria uma nova sala no banco de dados.
+* **Protegida?** Sim.
+* **Corpo da Requisição (JSON):**
+    ```json
+    {
+      "nome_sala": "3° C DS | VIKINGS",
+      "logo_url": "/logos/sala13.png"
+    }
+    ```
+* **Exemplo de Resposta (JSON) - Sucesso (201 Created):** Retorna o objeto da sala recém-criada, incluindo o novo `id`.
+    ```json
+    {
+      "id": 13,
+      "nome_sala": "3° C DS | VIKINGS",
+      "logo_url": "/logos/sala13.png"
+    }
+    ```
+
+#### `PUT /api/salas/:id`
+* **Descrição:** Atualiza as informações (nome e/ou URL da logo) de uma sala específica, identificada pelo `:id` na URL (ex: `/api/salas/13`).
+* **Protegida?** Sim.
+* **Corpo da Requisição (JSON):**
+    ```json
+    {
+      "nome_sala": "3° C DS | VIKINGS (ATUALIZADO)",
+      "logo_url": "/logos/vikings_novo.png"
+    }
+    ```
+* **Exemplo de Resposta (JSON) - Sucesso (200 OK):**
+    ```json
+    { "mensagem": "Sala atualizada com sucesso." }
+    ```
+
+#### `DELETE /api/salas/:id`
+* **Descrição:** Deleta uma sala específica do banco de dados, identificada pelo `:id` na URL. **Atenção:** Esta ação é irreversível.
+* **Protegida?** Sim.
+* **Exemplo de Resposta (JSON) - Sucesso (200 OK):**
+    ```json
+    { "mensagem": "Sala deletada com sucesso." }
+    ```
+
+### Rotas de Autenticação (`/api/auth`) - Complemento
+
+#### `GET /api/auth/logout`
+* **Descrição:** Encerra a sessão do usuário logado, invalidando seu "crachá" de acesso (cookie).
+* **Protegida?** Não (mas só faz sentido chamar se estiver logado).
+* **Exemplo de Resposta (JSON) - Sucesso (200 OK):**
+    ```json
+    { "mensagem": "Logout realizado com sucesso." }
+    ```
+
+#### `GET /api/auth/checar-login`
+* **Descrição:** Rota protegida utilizada pelo front-end para verificar se o usuário atual possui uma sessão ativa (se está logado). Essencial para proteger o acesso a páginas administrativas.
+* **Protegida?** Sim.
+* **Exemplo de Resposta (JSON) - Sucesso (200 OK):** Retorna o status e os dados básicos do usuário logado.
+    ```json
+    {
+      "status": "autenticado",
+      "userId": 5,
+      "username": "admin"
+    }
+    ```
+* **Exemplo de Resposta (JSON) - Falha (401 Unauthorized):** Se o usuário não estiver logado.
+    ```json
+    { "mensagem": "Acesso não autorizado. Faça o login primeiro." }
+    ```
+
+#### `POST /api/auth/forgot-password`
+* **Descrição:** Inicia o processo de recuperação de senha. Recebe o e-mail do usuário, gera um token secreto e envia um link de redefinição para o e-mail cadastrado.
+* **Protegida?** Não.
+* **Corpo da Requisição (JSON):**
+    ```json
+    { "email": "usuario_cadastrado@exemplo.com" }
+    ```
+* **Exemplo de Resposta (JSON) - Sucesso (200 OK):** Retorna uma mensagem genérica por segurança.
+    ```json
+    { "mensagem": "Se o e-mail estiver cadastrado, você receberá um link para redefinir a senha." }
+    ```
+
+#### `POST /api/auth/reset-password`
+* **Descrição:** Finaliza o processo de recuperação de senha. Recebe o token enviado por e-mail e a nova senha desejada. Valida o token e, se estiver correto e dentro da validade, atualiza a senha do usuário no banco.
+* **Protegida?** Não.
+* **Corpo da Requisição (JSON):**
+    ```json
+    {
+      "token": "token_secreto_recebido_no_email",
+      "newPassword": "novaSenhaSuperSegura123"
+    }
+    ```
+* **Exemplo de Resposta (JSON) - Sucesso (200 OK):**
+    ```json
+    { "mensagem": "Senha redefinida com sucesso!" }
+    ```
